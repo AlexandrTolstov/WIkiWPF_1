@@ -5,8 +5,152 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WIkiWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="600" Width="1000">
+    <Window.Resources>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="Control.Margin" Value="10"></Setter>
+            <Setter Property="Control.BorderBrush" Value="Gray"></Setter>
+            <Setter Property="Control.BorderThickness" Value="1"></Setter>
+            <Setter Property="Control.HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="Control.Background" Value="#F7F7F7"></Setter>
+        </Style>
         
-    </Grid>
+        <Style x:Key="BoldTextBig" TargetType="Run">
+            <Setter Property="Control.FontFamily" Value="Times New Roman"></Setter>
+            <Setter Property="Control.FontSize" Value="25"></Setter>
+            <Setter Property="Control.FontWeight" Value="Bold"></Setter>
+        </Style>
+
+        <Style x:Key="BlueBoldTextBig" TargetType="Run" BasedOn="{StaticResource BoldTextBig}">
+            <Setter Property="Control.Foreground" Value="#190773"></Setter>
+        </Style>
+
+        <Style x:Key="TextSmall" TargetType="Run" BasedOn="{StaticResource BoldTextBig}">
+            <Setter Property="Control.FontSize" Value="15"></Setter>
+            <Setter Property="Control.FontWeight" Value="Normal"></Setter>
+        </Style>
+
+        <Style x:Key="GrayTextSmall" TargetType="Run" BasedOn="{StaticResource TextSmall}">
+            <Setter Property="Control.Foreground" Value="Gray"></Setter>
+        </Style>
+
+        <Style x:Key="BlueText15" TargetType="Run" BasedOn="{StaticResource TextSmall}">
+            <Setter Property="Control.Foreground" Value="#190773"></Setter>
+        </Style>
+
+
+        <Style x:Key="HyperTextSmall" TargetType="Hyperlink">
+            <Setter Property="Control.FontFamily" Value="Times New Roman"></Setter>
+            <Setter Property="Control.FontSize" Value="15"></Setter>
+            <Setter Property="Control.Foreground" Value="#190773"></Setter>
+            <Setter Property="Focusable" Value="true"/>
+            <Setter Property="TextDecorations" Value=""/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property = "Foreground" Value="Blue"/>
+                    <Setter Property="TextDecorations" Value="Underline"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="HyperBoldTextSmall" TargetType="Hyperlink" BasedOn="{StaticResource HyperTextSmall}">
+            <Setter Property="Control.FontWeight" Value="Bold"></Setter>
+            <Setter Property="TextDecorations" Value=""/>
+            <Setter Property="Control.Foreground" Value="Black"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property = "Foreground" Value="Blue"/>
+                    <Setter Property="TextDecorations" Value=""/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="HyperTextMedium" TargetType="Hyperlink" BasedOn="{StaticResource HyperBoldTextSmall}">
+            <Setter Property="Control.FontSize" Value="18"></Setter>
+            <Setter Property="Control.FontWeight" Value="Normal"></Setter>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Control.Width" Value="140"></Setter>
+            <Setter Property="Control.Height" Value="30"></Setter>
+            <Setter Property="Control.Margin" Value="10 0 10 0"></Setter>
+            <Setter Property="Control.FontSize" Value="15"></Setter>
+            <Setter Property="Control.FontWeight" Value="Bold"></Setter>
+        </Style>
+    </Window.Resources>
+    <TabControl>
+        <TabItem Header="Заглавная">
+            <WrapPanel Orientation="Vertical">
+                <Grid Width="4000"></Grid>
+                <Border Style="{StaticResource BorderStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Margin="10 20 10 20">
+                            <Run Style="{StaticResource BoldTextBig}">Добро пожаловать в</Run>
+                            <Run Style="{StaticResource BlueBoldTextBig}"> Википедию</Run>
+                            <Run Style="{StaticResource BoldTextBig}">,</Run>
+                            <LineBreak/>
+                            <Hyperlink Style="{StaticResource HyperTextSmall}">свободную энциклопедию,</Hyperlink>
+                            <Run Style="{StaticResource TextSmall}">которую</Run>
+                            <Hyperlink Style="{StaticResource HyperTextSmall}">может редактировать каждый.</Hyperlink>
+                        </TextBlock>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       Margin="10 10 10 10"
+                                       HorizontalAlignment="Right">
+                                <Run Style="{StaticResource TextSmall}">Сейчас в Википедии</Run>
+                                <Hyperlink Style="{StaticResource HyperTextSmall}" FontWeight="Bold">1 536 428 статей</Hyperlink>
+                                <Run Style="{StaticResource TextSmall}">на</Run>
+                                <Hyperlink Style="{StaticResource HyperTextSmall}">русском языке.</Hyperlink>
+                            </TextBlock>
+                            <WrapPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+                                <TextBlock Grid.Row="0"
+                                       Margin="10 10 10 10"
+                                       HorizontalAlignment="Right">
+                                    <Hyperlink Style="{StaticResource HyperBoldTextSmall}">Порталы</Hyperlink>
+                                </TextBlock>
+                                <TextBlock Grid.Row="0"
+                                       Margin="10 10 10 10"
+                                       HorizontalAlignment="Right">
+                                    <Hyperlink Style="{StaticResource HyperBoldTextSmall}">Справка</Hyperlink>
+                                </TextBlock>
+                                <Button Style="{StaticResource ButtonStyle}" Content="Создать статью"></Button>
+                            </WrapPanel> 
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Grid ShowGridLines="True" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0" Style="{StaticResource BorderStyle}">
+                        <TextBlock Margin="10">
+                            <Run Style="{StaticResource GrayTextSmall}">Избранная статья</Run>
+                            <LineBreak/>
+                            <Hyperlink Style="{StaticResource HyperTextMedium}">Антонин Петрович Ладинский</Hyperlink>
+                            <LineBreak/>
+                            <LineBreak/>
+                        </TextBlock>
+                    </Border>
+                    <Border Grid.Column="1" Style="{StaticResource BorderStyle}">
+                        <TextBlock Margin="10" FontFamily="Times New Roman" FontWeight="Bold">Избранная статья</TextBlock>
+                    </Border>
+                </Grid>
+
+            </WrapPanel>
+        </TabItem>
+        <TabItem Header="Обсуждения">
+
+        </TabItem>
+    </TabControl>
 </Window>
