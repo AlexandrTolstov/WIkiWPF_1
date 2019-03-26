@@ -30,6 +30,11 @@
             <Setter Property="Control.FontWeight" Value="Normal"></Setter>
         </Style>
 
+        <Style x:Key="BoldTextSmall" TargetType="Run" BasedOn="{StaticResource BoldTextBig}">
+            <Setter Property="Control.FontSize" Value="15"></Setter>
+            <Setter Property="Control.FontWeight" Value="Bold"></Setter>
+        </Style>
+
         <Style x:Key="GrayTextSmall" TargetType="Run" BasedOn="{StaticResource TextSmall}">
             <Setter Property="Control.Foreground" Value="Gray"></Setter>
         </Style>
@@ -70,6 +75,11 @@
             <Setter Property="Control.FontWeight" Value="Normal"></Setter>
         </Style>
 
+        <Style x:Key="HyperBoldTextBig" TargetType="Hyperlink" BasedOn="{StaticResource HyperBoldTextSmall}">
+            <Setter Property="Control.FontSize" Value="25"></Setter>
+            <Setter Property="Control.FontWeight" Value="Bold"></Setter>
+        </Style>
+
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Control.Width" Value="140"></Setter>
             <Setter Property="Control.Height" Value="30"></Setter>
@@ -77,6 +87,24 @@
             <Setter Property="Control.FontSize" Value="15"></Setter>
             <Setter Property="Control.FontWeight" Value="Bold"></Setter>
         </Style>
+
+
+
+        <Style x:Key="ScrollBorderStyle" TargetType="FlowDocumentScrollViewer">
+            <Setter Property="Control.Margin" Value="10"></Setter>
+            <Setter Property="Control.BorderBrush" Value="Gray"></Setter>
+            <Setter Property="Control.BorderThickness" Value="1"></Setter>
+            <Setter Property="Control.HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="Control.Background" Value="#F7F7F7"></Setter>
+        </Style>
+
+        <Style x:Key="SmallGrayText" TargetType="Paragraph">
+            <Setter Property="Control.FontFamily" Value="Times New Roman"></Setter>
+            <Setter Property="Control.FontSize" Value="15"></Setter>
+            <Setter Property="Control.FontWeight" Value="Normal"></Setter>
+            <Setter Property="Control.Foreground" Value="Gray"></Setter>
+        </Style>
+        
     </Window.Resources>
     <TabControl>
         <TabItem Header="Заглавная">
@@ -91,7 +119,7 @@
                         <TextBlock Grid.Column="0"
                                    Margin="10 20 10 20">
                             <Run Style="{StaticResource BoldTextBig}">Добро пожаловать в</Run>
-                            <Run Style="{StaticResource BlueBoldTextBig}"> Википедию</Run>
+                            <Hyperlink Style="{StaticResource HyperBoldTextBig}">Википедии</Hyperlink>
                             <Run Style="{StaticResource BoldTextBig}">,</Run>
                             <LineBreak/>
                             <Hyperlink Style="{StaticResource HyperTextSmall}">свободную энциклопедию,</Hyperlink>
@@ -133,18 +161,31 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Column="0" Style="{StaticResource BorderStyle}">
-                        <TextBlock Margin="10">
-                            <Run Style="{StaticResource GrayTextSmall}">Избранная статья</Run>
-                            <LineBreak/>
-                            <Hyperlink Style="{StaticResource HyperTextMedium}">Антонин Петрович Ладинский</Hyperlink>
-                            <LineBreak/>
-                            <LineBreak/>
-                        </TextBlock>
-                    </Border>
-                    <Border Grid.Column="1" Style="{StaticResource BorderStyle}">
-                        <TextBlock Margin="10" FontFamily="Times New Roman" FontWeight="Bold">Избранная статья</TextBlock>
-                    </Border>
+                    <FlowDocumentScrollViewer Grid.Column="0" Style="{StaticResource ScrollBorderStyle}">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Floater Width="130" HorizontalAlignment="Right" Margin="0,0,5,5" Padding="3">
+                                    <BlockUIContainer>
+                                        <Image Source="Image\Moscow.jpg" Width="200"/>
+                                    </BlockUIContainer>
+                                </Floater>
+                                <Run Style="{StaticResource GrayTextSmall}">Избранная статья</Run>
+                                <LineBreak/>
+                                <Hyperlink Style="{StaticResource HyperTextMedium}">Покровские ворота</Hyperlink>
+                                <LineBreak/>
+                                <LineBreak/>
+                                <Run Style="{StaticResource BoldTextSmall}">"</Run>
+                                <Hyperlink Style="{StaticResource HyperBoldTextSmall}">Покровские ворота</Hyperlink>
+                                <Run Style="{StaticResource BoldTextSmall}">"</Run>
+                                <Run Style="{StaticResource TextSmall}"> - </Run>
+                                <Hyperlink Style="{StaticResource HyperTextSmall}">советский</Hyperlink>
+                            </Paragraph>
+                        </FlowDocument>
+                    </FlowDocumentScrollViewer>
+
+                    <FlowDocumentScrollViewer Grid.Column="1" Style="{StaticResource ScrollBorderStyle}">
+
+                    </FlowDocumentScrollViewer>
                 </Grid>
 
             </WrapPanel>
